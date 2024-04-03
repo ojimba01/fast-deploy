@@ -1,0 +1,3 @@
+chmod +x /home/ollie/Desktop/fast-deploy/mycli.py
+cd /home/ollie/Desktop/fast-deploy
+./mycli.py init

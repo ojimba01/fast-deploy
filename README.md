@@ -23,7 +23,7 @@ Fast-Deploy is a CLI tool designed to simplify the process of deploying web appl
 Clone the Fast-Deploy repository to your local machine:
 
 ```bash
-git clone https://github.com/yourgithubusername/fast-deploy.git
+git clone https://github.com/ojimba01/fast-deploy.git
 cd fast-deploy
 ```
 
@@ -31,9 +31,32 @@ cd fast-deploy
 
 - **Initialize your project:**
 
-  This will check your AWS CLI and Docker configurations and prompt you to set up a new project.
+This command checks your AWS CLI, Docker, Nixpacks, and AWS Copilot CLI configurations and prompts you to set up a new project configuration, including service type and environment settings.bash
+```bash
+./mycli.py init
+```
 
-  ```bash
-  ./mycli.py init
-  ```
+- **Build your Docker image with Nixpacks:**
 
+Automates the Docker image creation using Nixpacks, ensuring that the environment is prepped correctly before initiating the build.bash
+```bash
+./mycli.py build
+```
+
+- **Deploy your project:**
+
+Leverages AWS Copilot to deploy your project based on the defined configuration file, handling complex AWS interactions automatically.bash
+```bash
+./mycli.py deploy
+```
+
+- **Purge your project:**
+
+Removes all project components, including Docker and AWS resources, with an option to force deletion even if the configuration file is missing.bash
+```bash
+./mycli.py purge -f
+```Contributing
+
+We welcome contributions from the community. Please fork the repository and submit pull requests with new features or bug fixes
+
+Fast-Deploy is released under the MIT License. See the LICENSE file in the repository for more details.

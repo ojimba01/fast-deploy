@@ -16,6 +16,7 @@ Fast-Deploy is a CLI tool designed to simplify the process of deploying web appl
 - Docker installed on your system.
 - Nixpacks installed on your system.
 - AWS CLI installed and configured.
+- AWS Copilot installed and configured.
 - Python 3 and pip.
 
 ### Installation

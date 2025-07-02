@@ -16,9 +16,51 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
                         logging.StreamHandler()
                     ])
 
+def check_package_installation(package_name):
+    """Check if a Python package is installed."""
+    try:
+        # Try to import the package to see if it's installed
+        result = subprocess.run(
+            ["python", "-c", f"import {package_name}"],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        click.echo(f"{package_name} is installed.")
+
+    except subprocess.CalledProcessError:
+        click.echo(f"{package_name} is not installed or not functioning correctly.")
+        exit(1)
+    except FileNotFoundError:
+        click.echo(f"{package_name} not found. Please ensure it's installed.")
+        exit(1)
+
+
+# check_package_installation("numpy")
+
 
 def check_aws_configuration():
-    """Check for AWS CLI configuration and prompt the user to configure if not found."""
+    """Check for AWS CLI v2 installation and configuration."""
+    try:
+        # Check if AWS CLI v2 is installed by running 'aws --version'
+        result = subprocess.run(["aws", "--version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+        # Ensure it's AWS CLI v2
+        if "aws-cli/2" in result.stdout:
+            click.echo("AWS CLI v2 is installed.")
+        else:
+            click.echo("AWS CLI v2 is not installed. Please install AWS CLI version 2.")
+            exit(1)
+
+    except subprocess.CalledProcessError:
+        click.echo("AWS CLI is not functioning correctly.")
+        exit(1)
+    except FileNotFoundError:
+        click.echo("AWS CLI not found. Please install AWS CLI v2.")
+        exit(1)
+
+    # Proceed to check for configuration files
     aws_config_file = os.path.expanduser('~/.aws/config')
     aws_credentials_file = os.path.expanduser('~/.aws/credentials')
 
@@ -27,12 +69,8 @@ def check_aws_configuration():
         if click.confirm("Do you want to configure AWS CLI now?"):
             try:
                 subprocess.run(["aws", "configure"], check=True)
-            except subprocess.CalledProcessError as e:
-                click.echo(
-                    "Failed to run 'aws configure'. Please ensure AWS CLI is installed.")
-            except FileNotFoundError:
-                click.echo(
-                    "AWS CLI not found. Please install AWS CLI and run 'aws configure'.")
+            except subprocess.CalledProcessError:
+                click.echo("Failed to run 'aws configure'. Please ensure AWS CLI v2 is installed.")
         else:
             click.echo("AWS CLI configuration is required to deploy. Exiting.")
             exit(1)

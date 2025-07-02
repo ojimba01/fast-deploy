@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+
+"""
+fastdeploy.mycli
+~~~~~~~~~~~~~~~~
+
+Entrypoint for the Fast-Deploy CLI (mycli).
+"""
+
 import click
 import logging
 import json

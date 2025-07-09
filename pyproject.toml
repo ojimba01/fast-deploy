@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fastdeploy_cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "CLI tool to simplify web app deployments using Docker & Nixpacks"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -18,5 +18,10 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[project.urls]
+Homepage = "https://github.com/ojimba01/fast-deploy"
+Repository = "https://github.com/ojimba01/fast-deploy"
+"Bug Tracker" = "https://github.com/ojimba01/fast-deploy/issues"
+
 [project.entry-points."console_scripts"]
-mycli = "fastdeploy.mycli:cli"
+mycli = "fastdeploy_cli.mycli:cli"
